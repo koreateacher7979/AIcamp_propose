@@ -286,37 +286,42 @@
             </div>
 
             <div class="bg-white rounded-3xl shadow-lg p-8 md:p-10 border border-gray-100">
-                <form id="inquiryForm" onsubmit="sendEmail(event)" class="space-y-6">
+                <form id="inquiryForm" action="https://formsubmit.co/kbc792000@daum.net" method="POST" target="_blank" onsubmit="showSuccessMessage()" class="space-y-6">
+                    <!-- FormSubmit 설정 -->
+                    <input type="hidden" name="_subject" value="[AI 교육 캠프 문의] 새로운 제안 및 견적 문의가 도착했습니다.">
+                    <input type="hidden" name="_captcha" value="true">
+                    <input type="hidden" name="_template" value="table">
+                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">이름 (담당자)</label>
-                            <input type="text" id="name" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none" placeholder="홍길동">
+                            <input type="text" id="name" name="담당자_이름" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none" placeholder="홍길동">
                         </div>
                         <div>
                             <label for="affiliation" class="block text-sm font-medium text-gray-700 mb-1">소속 (기관/기업명)</label>
-                            <input type="text" id="affiliation" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none" placeholder="ㅇㅇ기관">
+                            <input type="text" id="affiliation" name="소속_기관" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none" placeholder="ㅇㅇ기관">
                         </div>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="contactInfo" class="block text-sm font-medium text-gray-700 mb-1">연락처</label>
-                            <input type="text" id="contactInfo" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none" placeholder="010-0000-0000 또는 이메일">
+                            <input type="text" id="contactInfo" name="연락처_및_이메일" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none" placeholder="010-0000-0000 또는 이메일">
                         </div>
                         <div>
                             <label for="targetGroup" class="block text-sm font-medium text-gray-700 mb-1">연수 진행 대상 및 인원</label>
-                            <input type="text" id="targetGroup" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none" placeholder="예: 소속 단체원 20명">
+                            <input type="text" id="targetGroup" name="연수_대상_및_인원" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none" placeholder="예: 소속 단체원 20명">
                         </div>
                     </div>
 
                     <div>
                         <label for="budget" class="block text-sm font-medium text-gray-700 mb-1">예상 예산</label>
-                        <input type="text" id="budget" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none" placeholder="예: 200만원 (미정일 경우 '미정' 입력)">
+                        <input type="text" id="budget" name="예상_예산" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none" placeholder="예: 200만원 (미정일 경우 '미정' 입력)">
                     </div>
 
                     <div>
                         <label for="details" class="block text-sm font-medium text-gray-700 mb-1">기타 문의 및 희망 사항</label>
-                        <textarea id="details" rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none resize-none" placeholder="캠프 일정, 특별히 다루고 싶은 주제 등을 자유롭게 적어주세요."></textarea>
+                        <textarea id="details" name="기타_문의사항" rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition outline-none resize-none" placeholder="캠프 일정, 특별히 다루고 싶은 주제 등을 자유롭게 적어주세요."></textarea>
                     </div>
 
                     <div class="pt-4">
@@ -324,15 +329,8 @@
                             <i class="ph-fill ph-paper-plane-right mr-2 text-xl"></i>
                             대표에게 제안 및 문의 보내기
                         </button>
-                        <div id="formStatus" class="mt-4 p-5 bg-blue-50 border border-blue-200 rounded-xl text-center hidden transition-all duration-300">
-                            <p class="text-blue-800 font-bold text-lg mb-2"><i class="ph-fill ph-info mr-1"></i> 메일 앱이 열렸나요?</p>
-                            <p class="text-blue-700 mb-4">현재 화면은 자동으로 메일을 발송하지 않습니다.<br>연결된 이메일 앱(아웃룩, 스마트폰 기본 메일 등)에서 <strong>[보내기]</strong> 버튼을 눌러야 전송이 완료됩니다.</p>
-                            <div class="border-t border-blue-200 pt-4">
-                                <p class="text-sm text-gray-600 mb-3">메일 앱이 열리지 않거나 직접 웹메일(네이버, 다음 등)로 보내시려면<br>아래 버튼을 눌러 내용을 복사한 후 <strong>kbc792000@daum.net</strong>으로 보내주세요.</p>
-                                <button type="button" onclick="copyToClipboard()" class="inline-flex items-center px-5 py-2.5 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition shadow-sm">
-                                    <i class="ph ph-copy mr-2 text-lg"></i> 작성 내용 복사하기
-                                </button>
-                            </div>
+                        <div id="formStatus" class="mt-4 p-5 rounded-xl text-center hidden transition-all duration-300">
+                            <!-- 상태 메시지가 여기에 표시됩니다 -->
                         </div>
                     </div>
                 </form>
@@ -349,101 +347,37 @@
     </footer>
 
     <script>
-        // 전역 변수로 body 내용 저장 (복사 기능용)
-        let emailBodyContent = "";
-
-        function sendEmail(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const affiliation = document.getElementById('affiliation').value;
-            const contactInfo = document.getElementById('contactInfo').value;
-            const targetGroup = document.getElementById('targetGroup').value;
-            const budget = document.getElementById('budget').value;
-            const details = document.getElementById('details').value;
-
-            // 수신자 이메일
-            const toEmail = "kbc792000@daum.net";
-            // 이메일 제목
-            const subject = `[AI 교육 캠프 문의] ${affiliation} - ${name}님`;
-            
-            // 이메일 본문 포맷팅
-            emailBodyContent = `가치있는 미래교육 연구소 김병찬 대표님,
-다음과 같이 AI 교육 캠프 관련 문의 및 견적을 요청합니다.
-
----------------------------------------------------
-■ 문의자 정보
-- 담당자 이름: ${name}
-- 소속 (기관/기업명): ${affiliation}
-- 연락처: ${contactInfo}
-
-■ 연수 및 캠프 정보
-- 연수 진행 대상: ${targetGroup}
-- 예상 예산: ${budget}
-
-■ 기타 문의 및 희망 사항
-${details}
----------------------------------------------------
-
-검토 후 위 연락처 또는 이메일로 회신 부탁드립니다.
-감사합니다.`;
-
-            // mailto 링크 생성
-            const mailtoLink = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBodyContent)}`;
-
-            // UI 피드백 표시
+        function showSuccessMessage() {
             const btn = document.getElementById('submitBtn');
             const status = document.getElementById('formStatus');
             
-            btn.innerHTML = '<i class="ph-fill ph-check-circle mr-2 text-xl"></i> 메일 앱 연결 중...';
-            btn.classList.remove('bg-primary-600', 'hover:bg-primary-700');
-            btn.classList.add('bg-green-600', 'hover:bg-green-700');
-            status.classList.remove('hidden');
-
-            // 메일 앱 실행
-            window.location.href = mailtoLink;
-
-            // 버튼 상태 원복 (약간의 지연 후)
+            // 폼 제출 시 UI 업데이트 (실제 전송은 새 창의 FormSubmit에서 처리됨)
             setTimeout(() => {
-                btn.innerHTML = '<i class="ph-fill ph-paper-plane-right mr-2 text-xl"></i> 대표에게 제안 및 문의 보내기';
-                btn.classList.remove('bg-green-600', 'hover:bg-green-700');
-                btn.classList.add('bg-primary-600', 'hover:bg-primary-700');
-            }, 3000);
-        }
-
-        // 내용 복사 기능
-        function copyToClipboard() {
-            if (!emailBodyContent) {
-                // 커스텀 알림 모달
-                const alertBox = document.createElement("div");
-                alertBox.className = "fixed top-5 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-lg shadow-xl z-50 transition-opacity";
-                alertBox.innerText = "먼저 문의 내용을 작성하고 보내기 버튼을 눌러주세요.";
-                document.body.appendChild(alertBox);
-                setTimeout(() => { alertBox.remove(); }, 3000);
-                return;
-            }
-            
-            // iframe 등 보안 제약 환경에서도 동작하도록 execCommand 사용
-            const textArea = document.createElement("textarea");
-            textArea.value = emailBodyContent;
-            document.body.appendChild(textArea);
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
+                btn.innerHTML = '<i class="ph-fill ph-check-circle mr-2 text-xl"></i> 메일 발송 진행 중';
+                btn.classList.remove('bg-primary-600', 'hover:bg-primary-700');
+                btn.classList.add('bg-green-600', 'hover:bg-green-700');
                 
-                // 복사 성공 커스텀 알림
-                const alertBox = document.createElement("div");
-                alertBox.className = "fixed top-5 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-xl z-50 flex items-center";
-                alertBox.innerHTML = '<i class="ph-fill ph-check-circle mr-2 text-xl"></i> 문의 내용이 복사되었습니다! 직접 메일로 전송해 주세요.';
-                document.body.appendChild(alertBox);
-                setTimeout(() => { alertBox.remove(); }, 4000);
+                status.innerHTML = `
+                    <div class="bg-blue-50 border border-blue-200 p-5 rounded-xl text-center">
+                        <p class="text-blue-800 font-bold text-lg mb-2"><i class="ph-fill ph-info mr-1"></i> 새 창에서 메일 전송이 진행됩니다.</p>
+                        <p class="text-blue-700 text-sm">
+                            최초 1회 사용 시, 수신자(kbc792000@daum.net) 메일함으로 <strong>인증 메일(Activate)</strong>이 발송됩니다.<br>
+                            해당 메일을 확인하여 승인해야 이후부터 정상 수신됩니다. (스팸함 확인 필수)
+                        </p>
+                    </div>
+                `;
+                status.classList.remove('hidden');
                 
-            } catch (err) {
-                console.error("복사 실패:", err);
-            }
-            
-            document.body.removeChild(textArea);
+                // 입력된 폼 내용 초기화
+                document.getElementById('inquiryForm').reset();
+                
+                // 10초 후 버튼 상태 원상복구
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="ph-fill ph-paper-plane-right mr-2 text-xl"></i> 대표에게 제안 및 문의 보내기';
+                    btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    btn.classList.add('bg-primary-600', 'hover:bg-primary-700');
+                }, 10000);
+            }, 100);
         }
     </script>
 </body>
